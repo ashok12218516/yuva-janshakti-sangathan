@@ -255,4 +255,66 @@ renderMembers();renderShirt();adminGuard();
   const idPreview=document.getElementById('idCardPreview');if(idPreview&&!idPreview.querySelector('.uploaded-id-logo')){const head=idPreview.querySelector('.id-head');if(head){const img=document.createElement('img');img.className='uploaded-id-logo';img.src=saved||'';img.alt='YJS Logo';img.style.display=saved?'block':'none';head.prepend(img)}}
   const style2=document.createElement('style');style2.textContent='.membership-brand{display:flex;align-items:center;gap:14px;padding:16px;border-radius:18px;background:linear-gradient(135deg,#f0fdf4,#fff7ed);border:1px solid #d9e6d2;margin-bottom:18px}.membership-brand img{width:64px;height:64px;object-fit:contain;border-radius:14px;background:#fff;border:2px solid #d97706;padding:3px}.membership-brand b{display:block;color:#14532d;font-size:20px}.membership-brand small{display:block;color:#66705f;margin-top:4px}.membership-badge{display:inline-block;margin:0 0 22px;padding:8px 14px;border-radius:999px;background:#ecfdf5;color:#166534;border:1px solid #bbf7d0;font-weight:700}.gallery-upload.admin-only{display:none!important}.admin-on .gallery-upload.admin-only{display:flex!important}.uploaded-id-logo{width:42px;height:42px;object-fit:contain;border-radius:50%;background:#fff;padding:2px;border:2px solid #fbbf24}.member-address-field textarea{min-height:100px}';document.head.appendChild(style2);
 })();
+</script><script>
+(function(){
+  const GALLERY_BUCKET='gallery-photos';
+  const gs=[...document.querySelectorAll('.section')].find(s=>s.querySelector('h2')?.textContent==='Gallery & Updates');
+  if(!gs)return;
+  const gallery=gs.querySelector('.gallery');
+  let box=gs.querySelector('.gallery-upload');
+  if(!box){box=document.createElement('div');box.className='gallery-upload admin-only';gallery.before(box)}
+  box.className='gallery-upload admin-only';
+  box.innerHTML='<b>🔐 Admin: Gallery Control</b><input id="galleryFilesFinal" type="file" accept="image/*" multiple><button class="btn gold" type="button" id="saveGalleryFinal">Upload Photos</button>';
+  const style=document.createElement('style');style.textContent='.gallery-upload-final{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:15px 0}.gallery-card-final{position:relative;background:#fff;border:1px solid #dce5ed;border-radius:14px;padding:8px;overflow:hidden}.gallery-card-final img{width:100%;height:170px;object-fit:cover;border-radius:10px;display:block}.gallery-delete-final{margin-top:7px;width:100%;padding:8px;border:0;border-radius:8px;background:#b91c1c;color:#fff;font-weight:700;cursor:pointer}.gallery-name-final{display:block;margin-top:6px;font-size:11px;word-break:break-all;color:#66705f}.admin-on .gallery-upload.admin-only{display:flex!important}';document.head.appendChild(style);
+  box.classList.add('gallery-upload-final');
+  async function render(){
+    try{
+      const r=await supabaseClient.storage.from(GALLERY_BUCKET).list('gallery',{limit:100,sortBy:{column:'created_at',order:'desc'}});
+      if(r.error)throw r.error;
+      const files=(r.data||[]).filter(x=>x.name);
+      if(!files.length){gallery.innerHTML='<div class="g">📷 No group photos yet</div>';return}
+      gallery.innerHTML=files.map(x=>{const path='gallery/'+x.name,url=supabaseClient.storage.from(GALLERY_BUCKET).getPublicUrl(path).data.publicUrl;return '<div class="gallery-card-final"><img src="'+url+'" alt="YJS Group Photo"><span class="gallery-name-final">'+safe(x.name)+'</span><button class="gallery-delete-final admin-only" type="button" data-gallery-delete="'+encodeURIComponent(path)+'">🗑 Delete Photo</button></div>'}).join('');
+      gallery.querySelectorAll('[data-gallery-delete]').forEach(btn=>btn.onclick=async()=>{if(!adminVerified){toast('Admin login required');return}const path=decodeURIComponent(btn.dataset.galleryDelete);if(!confirm('इस photo को permanently delete करें?'))return;btn.disabled=true;btn.textContent='Deleting...';const r=await supabaseClient.storage.from(GALLERY_BUCKET).remove([path]);if(r.error){toast('Delete failed: '+r.error.message);btn.disabled=false;btn.textContent='🗑 Delete Photo';return}toast('Photo deleted successfully');await render()});
+    }catch(err){
+      const local=JSON.parse(localStorage.getItem('yjsGalleryV1')||'[]');
+      gallery.innerHTML=local.length?local.map(x=>'<div class="gallery-card-final"><img src="'+x.src+'" alt="YJS Group Photo"><span class="gallery-name-final">'+safe(x.name)+'</span></div>').join(''):'<div class="g">📷 Gallery is not connected to cloud</div>';
+      if(adminVerified)toast('Gallery cloud error: '+(err?.message||'Check Supabase bucket/policies'));
+    }
+  }
+  const uploadBtn=document.getElementById('saveGalleryFinal');
+  uploadBtn.onclick=async()=>{
+    if(!adminVerified){toast('Admin login required');return}
+    const input=document.getElementById('galleryFilesFinal'),fs=[...input.files];
+    if(!fs.length){toast('Select group photo first');return}
+    uploadBtn.disabled=true;uploadBtn.textContent='Uploading...';let ok=0;
+    try{
+      for(const file of fs){
+        if(!file.type.startsWith('image/')){toast('Only image files allowed: '+file.name);continue}
+        if(file.size>5*1024*1024){toast('Photo 5MB से कम रखें: '+file.name);continue}
+        const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
+        const path='gallery/'+Date.now()+'-'+Math.random().toString(36).slice(2,9)+'.'+ext;
+        const r=await supabaseClient.storage.from(GALLERY_BUCKET).upload(path,file,{contentType:file.type,upsert:false});
+        if(r.error)throw r.error;ok++;
+      }
+      input.value='';await render();toast(ok+' photo'+(ok===1?'':'s')+' uploaded. Everyone can see them.');
+    }catch(err){toast('Gallery upload failed: '+(err?.message||'Check gallery-photos bucket and policies'))}
+    finally{uploadBtn.disabled=false;uploadBtn.textContent='Upload Photos'}
+  };
+  render();
+})();
+</script><style>
+.hero-card .notice{background:#0b3d2e!important;color:#fff!important;border:1px solid #f59e0b!important;border-left:5px solid #f59e0b!important;box-shadow:0 8px 20px #0004!important}
+.hero-card .notice .muted{color:#fff!important}
+</style><style>
+.hero-card .notice{overflow:hidden;position:relative;white-space:nowrap}
+.hero-card .notice .notice-moving{display:inline-block;min-width:100%;animation:yjsNoticeUp 14s linear infinite}
+@keyframes yjsNoticeUp{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.hero-card .notice:hover .notice-moving{animation-play-state:paused}
+</style><script>
+(function(){
+  const n=document.querySelector('.hero-card .notice');
+  if(!n||n.querySelector('.notice-moving'))return;
+  const text=n.textContent.trim();
+  n.innerHTML='<span class="notice-moving">'+text+'</span>';
+})();
 </script></body></html>
