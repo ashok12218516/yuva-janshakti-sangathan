@@ -572,3 +572,26 @@ renderMembers();renderShirt();adminGuard();
   }
 })();
 </script>
+<style id="yjsGalleryAspectRatioV40">
+/* Gallery V40: uploaded photos keep their original aspect ratio */
+.gallery-card-final{min-width:0;overflow:hidden;background:#fff;border:1px solid #dce5ed;border-radius:14px;padding:8px}
+.gallery-card-final img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  aspect-ratio:auto!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#f1f5f0;
+  border-radius:10px;
+}
+.gallery-name-final{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:12px;padding:7px 3px}
+.gallery-delete-final{width:100%;margin-top:3px}
+@media(max-width:800px){
+  .gallery-card-final{padding:6px;border-radius:12px}
+  .gallery-card-final img{height:auto!important;max-height:none!important}
+  .gallery-name-final{font-size:10px;padding:5px 2px}
+}
+</style>
