@@ -7,6 +7,159 @@
 :root{--p:#14532d;--a:#d97706;--g:#15803d;--bg:#f7f3e8;--card:#fffdf7;--text:#24301f;--muted:#66705f;--danger:#b91c1c;--soft:#ecf5df}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,"Noto Sans Devanagari",sans-serif;background:linear-gradient(180deg,#fffdf5,#edf6e8);color:var(--text)}a{text-decoration:none;color:inherit}.top{background:linear-gradient(90deg,#08243f,#0f766e);color:#fff;padding:9px 5%;font-size:13px;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}.nav{position:sticky;top:0;z-index:20;background:#ffffffee;backdrop-filter:blur(14px);border-bottom:1px solid #dce5ed;padding:12px 5%;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:10px;font-weight:800}.logo{width:46px;height:46px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(135deg,#f59e0b,#16a34a,#2563eb);color:#fff;font-weight:900;box-shadow:0 8px 20px #0f766e30}.brand small{display:block;color:var(--muted);font-weight:500}.links{display:flex;gap:14px;align-items:center;font-size:14px}.links a:hover{color:var(--g)}.btn{border:0;border-radius:11px;padding:11px 16px;background:linear-gradient(135deg,#0f9f6e,#087f5b);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 6px 16px #0f9f6e25}.btn.alt{background:#fff;color:var(--p);border:1px solid #cbd5e1;box-shadow:none}.btn.gold{background:linear-gradient(135deg,#f59e0b,#d97706);color:#111}.hero{padding:80px 5%;background:radial-gradient(circle at 82% 18%,#d9f99d 0,#dff7ec 24%,transparent 25%),linear-gradient(135deg,#08243f,#0b5360 62%,#0f766e);color:#fff}.hero-inner{max-width:1150px;margin:auto;display:grid;grid-template-columns:1.25fr .75fr;gap:40px;align-items:center}.tag{display:inline-block;background:#ffffff18;border:1px solid #ffffff30;padding:7px 12px;border-radius:999px}.hero h1{font-size:clamp(36px,6vw,64px);line-height:1.05;margin:18px 0}.hero p{font-size:18px;line-height:1.7;color:#e5eef7}.hero-card{background:#ffffff12;border:1px solid #ffffff25;border-radius:22px;padding:25px;backdrop-filter:blur(10px)}.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:25px}.stat{background:#fff;color:#102a43;border-radius:14px;padding:15px;text-align:center}.stat b{font-size:24px;display:block}.section{max-width:1150px;margin:auto;padding:70px 5%}.section h2{font-size:34px;margin:0 0 10px}.lead{color:var(--muted);margin-bottom:30px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.card{background:var(--card);border:1px solid #dce5ed;border-radius:18px;padding:22px;box-shadow:0 10px 28px #12315a10}.icon{font-size:30px}.card h3{margin:12px 0 7px}.muted{color:var(--muted);line-height:1.6}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.field{display:flex;flex-direction:column;gap:6px}.field.full{grid-column:1/-1}.field label{font-size:13px;font-weight:700}.field input,.field select,.field textarea{border:1px solid #cbd5e1;border-radius:10px;padding:12px;font:inherit;background:#fff;color:var(--text)}.field textarea{min-height:90px}.panel{background:#fff;border-radius:20px;border:1px solid #dce5ed;padding:25px;box-shadow:0 10px 30px #12315a10}.tools{display:grid;grid-template-columns:1fr 1fr;gap:25px}.id-preview{background:linear-gradient(145deg,#0b2742,#0f766e 55%,#b45309);color:#fff;border-radius:18px;padding:22px;max-width:390px;margin:auto;box-shadow:0 20px 45px #0b274233;border:2px solid #fbbf24}.id-head{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #ffffff38;padding-bottom:12px}.id-photo{width:90px;height:110px;border-radius:10px;background:#ffffff22;display:grid;place-items:center;font-size:38px;margin:20px auto 12px;border:1px solid #ffffff55}.id-name{text-align:center;font-size:22px;font-weight:800}.id-role{text-align:center;color:#d8f3dc}.id-details{margin-top:18px;display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:12px}.id-details div{background:#ffffff12;padding:8px;border-radius:8px}.shirt{height:390px;display:grid;place-items:center;background:linear-gradient(135deg,#eef6ff,#effaf5);border-radius:18px;overflow:hidden}.shirt-svg{width:260px}.color-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.swatch{width:30px;height:30px;border-radius:50%;border:2px solid #fff;box-shadow:0 0 0 1px #cbd5e1;cursor:pointer}.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.g{height:150px;border-radius:14px;background:linear-gradient(135deg,#dbeafe,#dcfce7);display:grid;place-items:center;color:#345;font-weight:700}.notice{border-left:4px solid var(--a);background:#fff7ed;padding:15px;border-radius:10px;margin:10px 0}.faq details{background:#fff;border:1px solid #e5e7eb;border-radius:10px;padding:15px;margin:9px 0}.admin-only{display:none!important}.admin-on .admin-only{display:block!important}.admin-on nav .admin-only{display:flex!important}.admin-dash{background:linear-gradient(135deg,#0b2742,#0f766e);color:#fff}.admin-dash .panel{color:var(--text)}.admin-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.admin-stat{background:#ffffff16;border:1px solid #ffffff24;border-radius:16px;padding:18px}.admin-stat b{display:block;font-size:28px}.data-table{width:100%;border-collapse:collapse;font-size:13px}.data-table th,.data-table td{padding:10px;border-bottom:1px solid #e5e7eb;text-align:left;vertical-align:top}.data-table th{background:#f1f5f9}.admin-actions{display:flex;gap:8px;flex-wrap:wrap}.footer{background:#071a2a;color:#dbe7f0;padding:50px 5%}.footgrid{max-width:1150px;margin:auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:30px}.modal{display:none;position:fixed;inset:0;background:#0008;z-index:100;align-items:center;justify-content:center;padding:20px}.modal.show{display:flex}.modalbox{background:#fff;border-radius:20px;padding:25px;max-width:650px;width:100%;max-height:90vh;overflow:auto}.close{float:right;border:0;background:#eee;border-radius:50%;width:34px;height:34px;cursor:pointer}.toast{position:fixed;bottom:20px;right:20px;background:#111827;color:#fff;padding:12px 18px;border-radius:10px;display:none;z-index:200}.toast.show{display:block}@media(max-width:800px){.links{display:flex;flex-wrap:wrap}.hero-inner,.tools,.cards,.footgrid,.admin-grid{grid-template-columns:1fr}.formgrid{grid-template-columns:1fr}.gallery{grid-template-columns:1fr 1fr}.hero{padding-top:50px}.section{padding:50px 5%}}
 @media print{body *{visibility:hidden}.printable,.printable *{visibility:visible}.printable{position:absolute;left:0;top:0;width:100%}.no-print{display:none!important}}
 </style>
+<script id="yjsMembershipRolesV46">
+document.addEventListener('DOMContentLoaded',function(){
+  const role=document.getElementById('mRole');
+  if(!role)return;
+  const roles=[
+    'संस्थापक एवं अध्यक्ष',
+    'उपाध्यक्ष',
+    'सचिव',
+    'उपसचिव',
+    'कोषाध्यक्ष',
+    'उपकोषाध्यक्ष',
+    'कार्यकारिणी अध्यक्ष',
+    'संगठन मंत्री',
+    'सलाहकार',
+    'मीडिया प्रभारी',
+    'संरक्षक मंडल'
+  ];
+  const existing=new Set([...role.options].map(o=>o.value));
+  roles.forEach(name=>{
+    if(!existing.has(name)){
+      const opt=document.createElement('option');
+      opt.value=name;
+      opt.textContent=name;
+      role.appendChild(opt);
+    }
+  });
+});
+</script>
+<script id="yjsOfficeBearersLogicV42">
+document.addEventListener('DOMContentLoaded',function(){
+  const BUCKET='gallery-photos';
+  const office=[
+    ['rohit-sahu','रोहित साहू','संस्थापक एवं अध्यक्ष','RS'],
+    ['sudama-sahu','सुदामा साहू','उपाध्यक्ष','SS'],
+    ['ashok-kumar','अशोक कुमार','सचिव','AK'],
+    ['pankaj-mahto','पंकज महतो','उपसचिव','PM'],
+    ['mahadev-sahu','महादेव साहू','कोषाध्यक्ष','MS'],
+    ['kuldeep-sahu','कुलदीप साहू','उपकोषाध्यक्ष','KS'],
+    ['santosh-mahli','संतोष महली','कार्यकारिणी अध्यक्ष','SM'],
+    ['saroj-sahu','सरोज साहू','संगठन मंत्री','SS'],
+    ['deepak-mahto','दीपक महतो','सलाहकार','DM'],
+    ['kamalnath-sahu','कमलनाथ साहू','सलाहकार','KS'],
+    ['purushotam','पुरुषोतम','मीडिया प्रभारी','P'],
+    ['pradeep-mahli-seetu','प्रदीप महली सीटू','मीडिया प्रभारी','PS'],
+    ['suraj-lohar','सूरज लोहार','संरक्षक मंडल','SL'],
+    ['karan-sahu','करण साहू','संरक्षक मंडल','KS'],
+    ['gramin-sadasya','समस्त ग्रामीण सदस्य','ग्रामीण सदस्य','GM']
+  ];
+  const publicUrl=(path)=>'https://irmbknvquxnqkmcbjzik.supabase.co/storage/v1/object/public/'+BUCKET+'/'+path.split('/').map(encodeURIComponent).join('/');
+  const safeText=(v)=>String(v).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+
+  async function findPhoto(slug){
+    try{
+      const r=await supabaseClient.storage.from(BUCKET).list('office-bearers/'+slug,{limit:20,sortBy:{column:'created_at',order:'desc'}});
+      if(r.error)throw r.error;
+      const f=(r.data||[]).find(x=>x.name&&/\.(jpg|jpeg|png|webp|gif)$/i.test(x.name));
+      return f?publicUrl('office-bearers/'+slug+'/'+f.name)+'?v='+Date.now():'';
+    }catch(_){return ''}
+  }
+
+  async function renderOffice(){
+    const grid=document.getElementById('officeBearersGrid');
+    if(!grid)return;
+    grid.innerHTML=office.map(([slug,name,role,initials])=>
+      '<div class="office-card" data-office="'+slug+'">'+
+      '<div class="office-photo-wrap"><div class="office-placeholder">'+safeText(initials)+'</div></div>'+
+      '<div class="office-name">'+safeText(name)+'</div>'+
+      '<div class="office-role">'+safeText(role)+'</div>'+
+      '<input class="office-upload" type="file" accept="image/*" data-office-file="'+slug+'">'+
+      '</div>'
+    ).join('');
+
+    await Promise.all(office.map(async ([slug])=>{
+      const card=grid.querySelector('[data-office="'+slug+'"]');
+      if(!card)return;
+      const url=await findPhoto(slug);
+      if(url){
+        const wrap=card.querySelector('.office-photo-wrap');
+        const img=document.createElement('img');
+        img.className='office-photo';img.alt='Office Bearer Photo';img.src=url;
+        wrap.innerHTML='';wrap.appendChild(img);
+      }
+    }));
+
+    grid.querySelectorAll('.office-upload').forEach(input=>input.addEventListener('change',async()=>{
+      if(!adminVerified){toast('Admin login required');input.value='';return}
+      const file=input.files[0],slug=input.dataset.officeFile;
+      if(!file)return;
+      if(!file.type.startsWith('image/')){toast('Only image photo allowed');input.value='';return}
+      if(file.size>5*1024*1024){toast('Photo 5MB से कम रखें');input.value='';return}
+      input.disabled=true;
+      try{
+        const old=await supabaseClient.storage.from(BUCKET).list('office-bearers/'+slug,{limit:50});
+        const oldFiles=(old.data||[]).filter(x=>x.name&&/\.(jpg|jpeg|png|webp|gif)$/i.test(x.name));
+        if(oldFiles.length)await supabaseClient.storage.from(BUCKET).remove(oldFiles.map(x=>'office-bearers/'+slug+'/'+x.name));
+        const ext=(file.name.split('.').pop()||'jpg').toLowerCase().replace(/[^a-z0-9]/g,'')||'jpg';
+        const path='office-bearers/'+slug+'/'+Date.now()+'.'+ext;
+        const up=await supabaseClient.storage.from(BUCKET).upload(path,file,{contentType:file.type,upsert:false,cacheControl:'3600'});
+        if(up.error)throw up.error;
+        toast('Photo save हो गई.');await renderOffice();
+      }catch(e){toast('Photo upload failed: '+(e?.message||'Check gallery-photos policy'))}
+      finally{input.disabled=false;input.value=''}
+    }));
+  }
+  renderOffice();
+
+  /* Group logo on Digital ID Card */
+  const idHead=document.querySelector('#idCardPreview .id-head');
+  if(idHead&&!idHead.querySelector('.id-group-logo')){
+    const oldTitle=idHead.querySelector('b');
+    const logoWrap=document.createElement('div');
+    logoWrap.style.cssText='display:flex;align-items:center;gap:8px;min-width:0';
+    logoWrap.innerHTML='<span class="id-logo-placeholder">YJS</span><img class="id-group-logo" id="idGroupLogo" alt="Yuva Janshakti Sangathan Logo"><b>YJS • MEMBER ID</b>';
+    if(oldTitle)oldTitle.remove();
+    idHead.prepend(logoWrap);
+  }
+  async function loadIDGroupLogo(){
+    const img=document.getElementById('idGroupLogo'),ph=document.querySelector('#idCardPreview .id-logo-placeholder');
+    if(!img)return;
+    try{
+      const r=await supabaseClient.storage.from(BUCKET).list('organization',{limit:100,sortBy:{column:'created_at',order:'desc'}});
+      if(r.error)throw r.error;
+      const f=(r.data||[]).filter(x=>x.name&&/\.(jpg|jpeg|png|webp|gif)$/i.test(x.name))[0];
+      if(!f)return;
+      img.src=publicUrl('organization/'+f.name)+'?v='+Date.now();
+      img.onload=()=>{img.style.display='block';if(ph)ph.style.display='none'};
+    }catch(_){
+      const nav=document.getElementById('navCloudLogo');
+      if(nav&&nav.src){img.src=nav.src;img.onload=()=>{img.style.display='block';if(ph)ph.style.display='none'}}
+    }
+  }
+  loadIDGroupLogo();
+});
+</script>
+<style id="yjsOfficeBearersV41">
+.office-bearers{margin-top:32px}
+.office-bearers h3{font-size:26px;margin:0 0 18px;color:var(--p)}
+.office-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.office-card{background:#fff;border:1px solid #dce5ed;border-radius:16px;padding:14px;text-align:center;box-shadow:0 8px 24px #12315a10}
+.office-photo{width:110px;height:110px;border-radius:50%;object-fit:cover;display:block;margin:0 auto 10px;border:3px solid #f59e0b;background:#eef5e9}
+.office-placeholder{width:110px;height:110px;border-radius:50%;display:grid;place-items:center;margin:0 auto 10px;background:linear-gradient(135deg,#14532d,#0f766e);color:#fff;font-size:34px;font-weight:800;border:3px solid #f59e0b}
+.office-name{font-size:17px;font-weight:800;color:#163b2a}
+.office-role{font-size:13px;color:#d97706;font-weight:800;margin-top:4px}
+.office-upload{display:none;margin-top:9px;width:100%;font-size:11px}
+.admin-on .office-upload{display:block}
+.office-social{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;justify-content:center}
+.office-social a{background:#fff;border:1px solid #dce5ed;border-radius:10px;padding:9px 13px;font-weight:700;color:var(--p)}
+.id-group-logo{width:54px;height:54px;border-radius:10px;object-fit:contain;background:#fff;padding:3px;display:none}
+.id-logo-placeholder{width:54px;height:54px;border-radius:10px;display:grid;place-items:center;background:linear-gradient(135deg,#f59e0b,#16a34a,#2563eb);color:#fff;font-size:11px;font-weight:900}
+@media(max-width:900px){.office-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:800px){.office-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.office-card{padding:10px}.office-photo,.office-placeholder{width:85px;height:85px}.office-name{font-size:14px}.office-role{font-size:11px}}
+@media(max-width:430px){.office-grid{grid-template-columns:1fr 1fr}.office-photo,.office-placeholder{width:78px;height:78px}}
+</style>
 <style id="yjsMobileResponsiveV39">
 html,body{width:100%;max-width:100%;overflow-x:hidden}
 img,video,svg{max-width:100%}
@@ -25,7 +178,16 @@ button,input,select,textarea{max-width:100%;min-width:0}
 <div class="top"><span>📍 Sugnu, Dumardaga Panchayat, Kanke, Ranchi, Jharkhand – 835103</span><span>एकता | सेवा | संघर्ष | विकास</span></div>
 <nav class="nav"><a class="brand" href="#home"><span class="logo">YJS</span><span>युवा जनशक्ति संगठन सुगनू<small>COMMUNITY • SERVICE • DEVELOPMENT</small></span></a><div class="links"><a href="#about">About</a><a href="#work">Activities</a><a href="#membership">Membership</a><a href="#gallery">Gallery</a><a href="#support">Support</a><a href="#noticeBoard">Notice</a><button class="btn" onclick="openModal('join')">Join Now</button><button class="btn gold" id="adminNavBtn" onclick="toggleAdmin()">🔐 Admin Login</button></div></nav>
 <section class="hero" id="home"><div class="hero-inner"><div><span class="tag">🌱 Community • Youth • Development</span><h1>सुगनू के विकास के लिए<br><span style="color:#fbbf24">युवा शक्ति</span> एक साथ।</h1><p>युवा जनशक्ति संगठन सुगनू का community platform — membership, ID card generation, T-shirt design, campaigns, complaints, donations और village development updates एक ही जगह।</p><div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn gold" onclick="openModal('join')">सदस्य बनें</button><a class="btn alt" href="#idcard">ID Card बनाएं</a><a class="btn alt" href="#support">सहयोग करें</a></div><button class="btn gold" onclick="toggleAdmin()" style="font-size:18px;padding:14px 24px;margin-top:16px;border:2px solid #fff;box-shadow:0 8px 25px #0005">🔐 ADMIN LOGIN</button><div class="statgrid"><div class="stat"><b id="memberCount">277+</b><span>Members</span></div><div class="stat"><b>2026–27</b><span>Development Plan</span></div><div class="stat"><b>835103</b><span>Village PIN</span></div></div></div><div class="hero-card"><h3>📢 Latest Notice</h3><div class="notice">गाँव की सफाई, अतिक्रमण एवं public-area improvement के लिए संगठन की गतिविधियाँ जारी हैं।</div><h3>🎯 Focus Areas</h3><p>Road • Drain • Water • Street Light • Cleanliness • Youth Participation • Welfare</p><hr style="border-color:#ffffff25"><small>Official community website concept for Yuva Janshakti Sangathan, Sugnu.</small></div></div></section>
-<section class="section" id="about"><h2>हमारे बारे में</h2><p class="lead">एक local youth-led community initiative, जिसका उद्देश्य सुगनू में सेवा, स्वच्छता, जनभागीदारी और विकास से जुड़े कामों को व्यवस्थित करना है।</p><div class="cards"><div class="card"><div class="icon">🤝</div><h3>एकता</h3><p class="muted">गाँव के युवाओं और ग्रामीणों को एक common platform पर जोड़ना।</p></div><div class="card"><div class="icon">🧹</div><h3>सेवा</h3><p class="muted">स्वच्छता, public-area improvement और जरूरत के समय community support।</p></div><div class="card"><div class="icon">🏗️</div><h3>विकास</h3><p class="muted">Road, drain, water, lighting और अन्य स्थानीय जरूरतों को officials तक व्यवस्थित रूप से रखना।</p></div></div></section>
+<section class="section" id="about"><h2>हमारे बारे में</h2><p class="lead">एक local youth-led community initiative, जिसका उद्देश्य सुगनू में सेवा, स्वच्छता, जनभागीदारी और विकास से जुड़े कामों को व्यवस्थित करना है।</p><div class="cards"><div class="card"><div class="icon">🤝</div><h3>एकता</h3><p class="muted">गाँव के युवाओं और ग्रामीणों को एक common platform पर जोड़ना।</p></div><div class="card"><div class="icon">🧹</div><h3>सेवा</h3><p class="muted">स्वच्छता, public-area improvement और जरूरत के समय community support।</p></div><div class="card"><div class="icon">🏗️</div><h3>विकास</h3><p class="muted">Road, drain, water, lighting और अन्य स्थानीय जरूरतों को officials तक व्यवस्थित रूप से रखना।</p></div></div>
+<div class="office-bearers">
+  <h3>मुख्य पदाधिकारी</h3>
+  <div class="office-grid" id="officeBearersGrid"></div>
+  <div class="office-social">
+    <a href="https://www.youtube.com/@yuva.jansakti" target="_blank" rel="noopener">▶ YouTube: yuva.jansakti</a>
+    <a href="https://www.instagram.com/yuva.jansakti/" target="_blank" rel="noopener">◎ Instagram: yuva.jansakti</a>
+    <a href="https://www.facebook.com/profile.php?id=61593550683417" target="_blank" rel="noopener">f Facebook: युवा जनशक्ति संगठन</a>
+  </div>
+</div></section>
 <section class="section" id="work"><h2>हम क्या करते हैं</h2><p class="lead">Village activities को document और coordinate करने के लिए dedicated modules.</p><div class="cards"><div class="card"><div class="icon">🛣️</div><h3>Road & Drain</h3><p class="muted">Road, PCC, drainage और waterlogging issues की पहचान व representation.</p></div><div class="card"><div class="icon">💡</div><h3>Street Light & Water</h3><p class="muted">Street lights, handpumps और drinking-water related public issues.</p></div><div class="card"><div class="icon">♻️</div><h3>Cleanliness Drive</h3><p class="muted">Cleaning drives, waste awareness और public-place cleanliness campaigns.</p></div><div class="card"><div class="icon">📣</div><h3>Public Awareness</h3><p class="muted">Notices, meetings, Gram Sabha updates और community announcements.</p></div><div class="card"><div class="icon">👥</div><h3>Youth Participation</h3><p class="muted">Volunteer registration, team roles और event participation tracking.</p></div><div class="card"><div class="icon">📑</div><h3>Representation</h3><p class="muted">Local issues के लिए applications, follow-up और status records.</p></div></div></section>
 <section class="section" id="membership"><h2>Membership Registration</h2><p class="lead">Photo सहित member profile बनाएं और registration के बाद digital ID card तैयार करें।</p><div class="panel"><form id="joinForm" class="formgrid"><div class="field"><label>Full Name *</label><input id="mName" required placeholder="अपना नाम"></div><div class="field"><label>Mobile *</label><input id="mPhone" required pattern="[0-9]{10}" placeholder="10 digit mobile"></div><div class="field"><label>Village / Tola</label><select id="mTola"><option>Sugnu Upper Tola</option><option>Mukhiya Tola</option><option>Kudri Tola</option><option>Pahan Tola</option><option>Hara Dhhipa</option><option>Darhi Tola</option><option>Mahli Tola</option><option>Mahto Tola</option><option>Khudra Tand</option><option>Gulochi Tand</option><option>Kaditola</option><option>Lohra Tola</option><option>Other</option></select></div><div class="field"><label>Role / Category</label><select id="mRole"><option>Community Member</option><option>Volunteer</option><option>Executive Member</option><option>Advisor</option></select></div><div class="field full"><label>Member Photo *</label><input id="mPhoto" type="file" accept="image/*" required></div><div class="field full"><label>Address / Note</label><textarea id="mNote" placeholder="Optional"></textarea></div><div class="field full"><button class="btn" type="submit">Register Member + Generate ID</button></div></form></div></section>
 <section class="section admin-only" id="members"><h2>Our Members</h2><p class="lead">यह section केवल admin login के बाद दिखाई देगा।</p><div id="memberGrid" class="cards"></div></section>
