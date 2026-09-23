@@ -317,4 +317,77 @@ renderMembers();renderShirt();adminGuard();
   const text=n.textContent.trim();
   n.innerHTML='<span class="notice-moving">'+text+'</span>';
 })();
+</script><script>
+(function(){
+  const GALLERY_BUCKET='gallery-photos';
+  const heroCard=document.querySelector('.hero-card');
+  if(heroCard&&!heroCard.querySelector('.public-logo-box')){
+    const box=document.createElement('div');
+    box.className='public-logo-box';
+    box.innerHTML='<div class="public-logo-title">🌿 युवा जनशक्ति संगठन</div><img id="publicGroupLogo" alt="Yuva Janshakti Sangathan Logo"><div id="publicLogoPlaceholder">Group Logo</div><div class="public-logo-admin admin-only"><input id="publicLogoFile" type="file" accept="image/*"><button class="btn gold" type="button" id="uploadPublicLogo">Upload / Change Logo</button></div>';
+    const notice=heroCard.querySelector('h3');
+    heroCard.insertBefore(box,notice);
+  }
+  const style=document.createElement('style');
+  style.textContent='.public-logo-box{text-align:center;background:#ffffff12;border:1px solid #ffffff30;border-radius:18px;padding:14px;margin-bottom:18px}.public-logo-box img{display:none;width:105px;height:105px;object-fit:contain;margin:0 auto 8px;border-radius:18px;background:#fff;padding:6px;box-shadow:0 8px 24px #0005}.public-logo-title{font-size:18px;font-weight:800;color:#fff;margin-bottom:8px}.public-logo-box #publicLogoPlaceholder{width:105px;height:105px;margin:0 auto 8px;border-radius:18px;border:2px dashed #ffffff80;display:grid;place-items:center;color:#ffffffaa;font-size:12px}.public-logo-admin{justify-content:center;gap:8px;align-items:center;flex-wrap:wrap}.admin-on .public-logo-admin{display:flex!important}.public-logo-admin input{max-width:190px}.gallery-card-final img{background:#eef4ed;min-height:170px}.gallery-card-final img[src]{image-rendering:auto}';
+  document.head.appendChild(style);
+  async function loadPublicLogo(){
+    const img=document.getElementById('publicGroupLogo'),ph=document.getElementById('publicLogoPlaceholder');
+    if(!img)return;
+    try{
+      const r=await supabaseClient.storage.from(GALLERY_BUCKET).list('organization',{limit:20,sortBy:{column:'created_at',order:'desc'}});
+      if(r.error)throw r.error;
+      const files=(r.data||[]).filter(x=>x.name&&/\.(jpg|jpeg|png|webp|gif)$/i.test(x.name));
+      if(!files.length)return;
+      const path='organization/'+files[0].name;
+      const url=supabaseClient.storage.from(GALLERY_BUCKET).getPublicUrl(path).data.publicUrl+'?v='+Date.now();
+      img.onload=()=>{img.style.display='block';if(ph)ph.style.display='none'};
+      img.onerror=()=>{img.style.display='none';if(ph)ph.style.display='grid'};
+      img.src=url;
+    }catch(_){
+      const local=localStorage.getItem('yjsOrgLogoV1');
+      if(local){img.src=local;img.style.display='block';if(ph)ph.style.display='none'}
+    }
+  }
+  loadPublicLogo();
+  const up=document.getElementById('uploadPublicLogo');
+  if(up)up.onclick=async()=>{
+    if(!adminVerified){toast('Admin login required');return}
+    const file=document.getElementById('publicLogoFile').files[0];
+    if(!file){toast('पहले logo select करें');return}
+    if(!file.type.startsWith('image/')){toast('Only image logo allowed');return}
+    if(file.size>3*1024*1024){toast('Logo 3MB से कम रखें');return}
+    up.disabled=true;up.textContent='Uploading...';
+    try{
+      const ext=(file.name.split('.').pop()||'png').toLowerCase().replace(/[^a-z0-9]/g,'')||'png';
+      const path='organization/'+Date.now()+'-logo.'+ext;
+      const r=await supabaseClient.storage.from(GALLERY_BUCKET).upload(path,file,{contentType:file.type,upsert:false});
+      if(r.error)throw r.error;
+      localStorage.setItem('yjsOrgLogoV1',supabaseClient.storage.from(GALLERY_BUCKET).getPublicUrl(path).data.publicUrl);
+      await loadPublicLogo();
+      toast('Logo uploaded. अब सबको दिखेगा.');
+      document.getElementById('publicLogoFile').value='';
+    }catch(err){toast('Logo upload failed: '+(err?.message||'Check gallery-photos policy'))}
+    finally{up.disabled=false;up.textContent='Upload / Change Logo'}
+  };
+  const gallerySection=[...document.querySelectorAll('.section')].find(s=>s.querySelector('h2')?.textContent==='Gallery & Updates');
+  if(gallerySection){
+    const gallery=gallerySection.querySelector('.gallery');
+    async function refreshGalleryImages(){
+      const cards=gallery?.querySelectorAll('.gallery-card-final img')||[];
+      cards.forEach(img=>{
+        img.onerror=()=>{
+          img.style.display='none';
+          const msg=document.createElement('div');
+          msg.style.cssText='height:170px;border-radius:10px;display:grid;place-items:center;background:#fee2e2;color:#991b1b;font-weight:700;text-align:center;padding:10px';
+          msg.textContent='Photo load नहीं हो रही';
+          img.parentElement.insertBefore(msg,img);
+        };
+      });
+    }
+    const oldRender=window.renderGalleryAdmin;
+    if(typeof oldRender==='function')oldRender();
+    setTimeout(refreshGalleryImages,800);
+  }
+})();
 </script></body></html>
