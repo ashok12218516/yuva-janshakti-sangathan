@@ -192,7 +192,591 @@ button,input,select,textarea{max-width:100%;min-width:0}
 <section class="section" id="work"><h2>हम क्या करते हैं</h2><p class="lead">Village activities को document और coordinate करने के लिए dedicated modules.</p><div class="cards"><div class="card"><div class="icon">🛣️</div><h3>Road & Drain</h3><p class="muted">Road, PCC, drainage और waterlogging issues की पहचान व representation.</p></div><div class="card"><div class="icon">💡</div><h3>Street Light & Water</h3><p class="muted">Street lights, handpumps और drinking-water related public issues.</p></div><div class="card"><div class="icon">♻️</div><h3>Cleanliness Drive</h3><p class="muted">Cleaning drives, waste awareness और public-place cleanliness campaigns.</p></div><div class="card"><div class="icon">📣</div><h3>Public Awareness</h3><p class="muted">Notices, meetings, Gram Sabha updates और community announcements.</p></div><div class="card"><div class="icon">👥</div><h3>Youth Participation</h3><p class="muted">Volunteer registration, team roles और event participation tracking.</p></div><div class="card"><div class="icon">📑</div><h3>Representation</h3><p class="muted">Local issues के लिए applications, follow-up और status records.</p></div></div></section>
 <section class="section" id="membership"><h2>Membership Registration</h2><p class="lead">Photo सहित member profile बनाएं और registration के बाद digital ID card तैयार करें।</p><div class="panel"><form id="joinForm" class="formgrid"><div class="field"><label>Full Name *</label><input id="mName" required placeholder="अपना नाम"></div><div class="field"><label>Mobile *</label><input id="mPhone" required pattern="[0-9]{10}" placeholder="10 digit mobile"></div><div class="field"><label>Village / Tola</label><select id="mTola"><option>Sugnu Upper Tola</option><option>Mukhiya Tola</option><option>Kudri Tola</option><option>Pahan Tola</option><option>Hara Dhhipa</option><option>Darhi Tola</option><option>Mahli Tola</option><option>Mahto Tola</option><option>Khudra Tand</option><option>Gulochi Tand</option><option>Kaditola</option><option>Lohra Tola</option><option>Other</option></select></div><div class="field"><label>Role / Category</label><select id="mRole"><option>Community Member</option><option>Volunteer</option><option>Executive Member</option><option>Advisor</option></select></div><div class="field full"><label>Member Photo *</label><input id="mPhoto" type="file" accept="image/*" required></div><div class="field full"><label>Address / Note</label><textarea id="mNote" placeholder="Optional"></textarea></div><div class="field full"><button class="btn" type="submit">Register Member + Generate ID</button></div></form></div></section>
 <section class="section admin-only" id="members"><h2>Our Members</h2><p class="lead">यह section केवल admin login के बाद दिखाई देगा।</p><div id="memberGrid" class="cards"></div></section>
-<section class="section admin-only" id="idcard"><h2>Digital ID Card Generator</h2><p class="lead">Admin verified member के लिए professional ID card बनाएं और Print / Save PDF करें।</p><div class="tools"><div class="panel"><div class="formgrid"><div class="field"><label>Name</label><input id="idName" value="Ashok Kumar"></div><div class="field"><label>Member ID</label><input id="idNo" value="YJS-0001"></div><div class="field"><label>Role</label><input id="idRole" value="Member"></div><div class="field"><label>Mobile</label><input id="idPhone" value="9XXXXXXXXX"></div><div class="field"><label>Blood Group</label><input id="idBlood" value="—"></div><div class="field"><label>Valid Till</label><input id="idValid" value="31/03/2027"></div><div class="field full"><label>Member Photo</label><input id="idPhotoInput" type="file" accept="image/*" onchange="loadIDPhoto(this)"></div></div><div style="margin-top:15px;display:flex;gap:10px"><button class="btn" onclick="updateID()">Generate ID</button><button class="btn alt" onclick="window.print()">Print / Save PDF</button></div></div><div class="printable" id="idCardPreview"><div class="id-preview"><div class="id-head"><b>YJS • MEMBER ID</b><span>2026–27</span></div><img id="pvPhoto" class="id-photo" src="" alt="Member Photo"><div class="id-name" id="pvName">Ashok Kumar</div><div class="id-role" id="pvRole">Member</div><div class="id-details"><div><b>ID</b><br><span id="pvNo">YJS-0001</span></div><div><b>Mobile</b><br><span id="pvPhone">9XXXXXXXXX</span></div><div><b>Blood</b><br><span id="pvBlood">—</span></div><div><b>Valid</b><br><span id="pvValid">31/03/2027</span></div></div><p style="text-align:center;font-size:11px;margin:18px 0 0;color:#dbeafe">Sugnu, Dumardaga, Kanke, Ranchi, Jharkhand</p></div></div></div></section>
+<section class="section admin-only" id="idcard">
+
+<style>
+/* =========================
+   YJS DIGITAL ID CARD
+   ========================= */
+
+#idcard .yjs-id-wrap{
+  display:flex;
+  justify-content:center;
+  width:100%;
+}
+
+#idcard .yjs-id-card{
+  width:340px !important;
+  height:470px !important;
+  box-sizing:border-box !important;
+  overflow:hidden !important;
+  position:relative;
+  margin:10px auto !important;
+  padding:0 16px 14px !important;
+
+  border:2px solid #f5bd28 !important;
+  border-radius:18px !important;
+
+  background:
+    linear-gradient(
+      155deg,
+      #064b5b 0%,
+      #086b69 48%,
+      #b55c0d 100%
+    ) !important;
+
+  color:#fff !important;
+  box-shadow:0 12px 30px rgba(0,0,0,.22) !important;
+}
+
+/* HEADER */
+#idcard .yjs-id-header{
+  height:88px !important;
+  margin:0 -16px 14px !important;
+  padding:12px 14px !important;
+  box-sizing:border-box !important;
+
+  display:flex !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:8px !important;
+
+  background:
+    linear-gradient(
+      90deg,
+      #f5a900 0%,
+      #f5f1d9 20%,
+      #ffffff 58%,
+      #1769e8 100%
+    ) !important;
+
+  border-bottom:2px solid #f5bd28 !important;
+}
+
+/* LOGO + NAME */
+#idcard .yjs-id-brand{
+  display:flex !important;
+  align-items:center !important;
+  gap:9px !important;
+  min-width:0 !important;
+}
+
+#idcard .yjs-id-logo{
+  width:53px !important;
+  height:53px !important;
+  min-width:53px !important;
+  object-fit:contain !important;
+
+  background:#fff !important;
+  padding:2px !important;
+  box-sizing:border-box !important;
+
+  border-radius:8px !important;
+  border:1px solid #d9ad23 !important;
+}
+
+#idcard .yjs-id-org{
+  font-size:16px !important;
+  font-weight:900 !important;
+  line-height:1.2 !important;
+  color:#183b27 !important;
+}
+
+#idcard .yjs-id-year{
+  font-size:13px !important;
+  font-weight:900 !important;
+  color:#183b27 !important;
+  white-space:nowrap !important;
+}
+
+/* PHOTO */
+#idcard .yjs-id-photo-wrap{
+  display:flex !important;
+  justify-content:center !important;
+  margin:8px 0 9px !important;
+}
+
+#idcard .yjs-id-photo{
+  width:88px !important;
+  height:108px !important;
+
+  object-fit:cover !important;
+  object-position:center !important;
+
+  border-radius:9px !important;
+  border:2px solid #f5c84b !important;
+
+  background:rgba(255,255,255,.12) !important;
+  box-shadow:0 5px 15px rgba(0,0,0,.30) !important;
+}
+
+/* NAME */
+#idcard .yjs-id-name{
+  text-align:center !important;
+  font-size:23px !important;
+  line-height:1.1 !important;
+  font-weight:900 !important;
+  color:#fff !important;
+  text-shadow:0 2px 5px rgba(0,0,0,.35) !important;
+  margin:3px 0 0 !important;
+}
+
+#idcard .yjs-id-role{
+  text-align:center !important;
+  font-size:14px !important;
+  font-weight:700 !important;
+  color:#e8f7ec !important;
+  margin-top:4px !important;
+}
+
+/* DETAILS */
+#idcard .yjs-id-details{
+  margin-top:17px !important;
+
+  display:grid !important;
+  grid-template-columns:1fr 1fr !important;
+  gap:8px !important;
+}
+
+#idcard .yjs-id-detail{
+  min-height:43px !important;
+  box-sizing:border-box !important;
+
+  padding:7px 9px !important;
+
+  border-radius:9px !important;
+  background:rgba(255,255,255,.10) !important;
+  border:1px solid rgba(255,255,255,.08) !important;
+}
+
+#idcard .yjs-id-detail b{
+  display:block !important;
+  font-size:11px !important;
+  line-height:1.1 !important;
+  color:#fff !important;
+}
+
+#idcard .yjs-id-detail span{
+  display:block !important;
+  margin-top:2px !important;
+
+  font-size:10px !important;
+  line-height:1.15 !important;
+
+  color:#dff5e7 !important;
+  word-break:break-word !important;
+}
+
+/* ADDRESS */
+#idcard .yjs-id-address{
+  position:absolute !important;
+  left:16px !important;
+  right:16px !important;
+  bottom:12px !important;
+
+  text-align:center !important;
+  font-size:10px !important;
+  line-height:1.3 !important;
+  color:#e7f3ea !important;
+}
+
+/* MOBILE */
+@media(max-width:430px){
+
+  #idcard .yjs-id-card{
+    width:320px !important;
+    height:450px !important;
+    padding-left:13px !important;
+    padding-right:13px !important;
+  }
+
+  #idcard .yjs-id-header{
+    margin-left:-13px !important;
+    margin-right:-13px !important;
+  }
+
+  #idcard .yjs-id-org{
+    font-size:15px !important;
+  }
+
+  #idcard .yjs-id-logo{
+    width:48px !important;
+    height:48px !important;
+    min-width:48px !important;
+  }
+
+}
+
+/* =========================
+   PRINT / SAVE PDF
+   EXACT CARD SIZE
+   ========================= */
+
+@page{
+  size:72mm 100mm;
+  margin:0;
+}
+
+@media print{
+
+  html,
+  body{
+    width:72mm !important;
+    height:100mm !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:hidden !important;
+    background:#fff !important;
+  }
+
+  body *{
+    visibility:hidden !important;
+  }
+
+  #idCardPreview,
+  #idCardPreview *{
+    visibility:visible !important;
+  }
+
+  #idCardPreview{
+    position:fixed !important;
+    left:0 !important;
+    top:0 !important;
+
+    width:72mm !important;
+    height:100mm !important;
+
+    margin:0 !important;
+    padding:0 !important;
+
+    display:block !important;
+    overflow:hidden !important;
+  }
+
+  #idcard .yjs-id-card{
+
+    width:72mm !important;
+    height:100mm !important;
+
+    margin:0 !important;
+
+    padding:0 3.4mm 3.4mm !important;
+
+    border:0.5mm solid #f5bd28 !important;
+    border-radius:3.8mm !important;
+
+    box-shadow:none !important;
+
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+
+  #idcard .yjs-id-header{
+
+    height:19mm !important;
+
+    margin:0 -3.4mm 3mm !important;
+
+    padding:2.5mm 3mm !important;
+
+    border-bottom:0.5mm solid #f5bd28 !important;
+
+    -webkit-print-color-adjust:exact !important;
+    print-color-adjust:exact !important;
+  }
+
+  #idcard .yjs-id-logo{
+    width:11.5mm !important;
+    height:11.5mm !important;
+    min-width:11.5mm !important;
+
+    border-radius:1.7mm !important;
+  }
+
+  #idcard .yjs-id-org{
+    font-size:4mm !important;
+  }
+
+  #idcard .yjs-id-year{
+    font-size:3.1mm !important;
+  }
+
+  #idcard .yjs-id-photo-wrap{
+    margin:1.5mm 0 2mm !important;
+  }
+
+  #idcard .yjs-id-photo{
+    width:22mm !important;
+    height:27mm !important;
+
+    border:0.5mm solid #f5c84b !important;
+    border-radius:2mm !important;
+  }
+
+  #idcard .yjs-id-name{
+    font-size:5.5mm !important;
+    margin-top:.5mm !important;
+  }
+
+  #idcard .yjs-id-role{
+    font-size:3.4mm !important;
+    margin-top:.8mm !important;
+  }
+
+  #idcard .yjs-id-details{
+    margin-top:3.5mm !important;
+    gap:1.7mm !important;
+  }
+
+  #idcard .yjs-id-detail{
+    min-height:8.8mm !important;
+    padding:1.5mm 1.8mm !important;
+    border-radius:1.7mm !important;
+  }
+
+  #idcard .yjs-id-detail b{
+    font-size:2.7mm !important;
+  }
+
+  #idcard .yjs-id-detail span{
+    font-size:2.45mm !important;
+  }
+
+  #idcard .yjs-id-address{
+    left:3.4mm !important;
+    right:3.4mm !important;
+    bottom:2.8mm !important;
+    font-size:2.45mm !important;
+  }
+}
+</style>
+
+
+<h2>Digital ID Card Generator</h2>
+
+<p class="lead">
+  Admin verified member के लिए professional ID card बनाएं और Print / Save PDF करें।
+</p>
+
+
+<div class="tools">
+
+  <!-- ================= FORM ================= -->
+
+  <div class="panel">
+
+    <div class="formgrid">
+
+      <div class="field">
+        <label>Name</label>
+        <input id="idName" value="Ashok Kumar">
+      </div>
+
+      <div class="field">
+        <label>Member</label>
+        <input id="idNo" value="YJS-0001">
+      </div>
+
+      <div class="field">
+        <label>Role</label>
+        <input id="idRole" value="Member">
+      </div>
+
+      <div class="field">
+        <label>Mobile</label>
+        <input id="idPhone" value="9XXXXXXXXX">
+      </div>
+
+      <div class="field">
+        <label>Blood Group</label>
+        <input id="idBlood" value="—">
+      </div>
+
+      <div class="field">
+        <label>Valid Till</label>
+        <input id="idValid" value="31/03/2027">
+      </div>
+
+      <div class="field full">
+        <label>Member Photo</label>
+        <input
+          id="idPhotoInput"
+          type="file"
+          accept="image/*"
+          onchange="loadIDPhoto(this)"
+        >
+      </div>
+
+    </div>
+
+
+    <div style="margin-top:15px;display:flex;gap:10px;flex-wrap:wrap">
+
+      <button
+        class="btn"
+        onclick="updateID()"
+      >
+        Generate ID
+      </button>
+
+      <button
+        class="btn alt"
+        onclick="window.print()"
+      >
+        Print / Save PDF
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- ================= ID CARD ================= -->
+
+  <div class="printable" id="idCardPreview">
+
+    <div class="yjs-id-wrap">
+
+      <div class="yjs-id-card">
+
+
+        <!-- HEADER -->
+
+        <div class="yjs-id-header">
+
+          <div class="yjs-id-brand">
+
+            <img
+              id="idGroupLogo"
+              class="yjs-id-logo"
+              src=""
+              alt="YJS Logo"
+            >
+
+            <div class="yjs-id-org">
+              युवा जनशक्ति संगठन सुगनू
+            </div>
+
+          </div>
+
+          <div class="yjs-id-year">
+            2026–27
+          </div>
+
+        </div>
+
+
+        <!-- MEMBER PHOTO -->
+
+        <div class="yjs-id-photo-wrap">
+
+          <img
+            id="pvPhoto"
+            class="yjs-id-photo"
+            src=""
+            alt="Member Photo"
+          >
+
+        </div>
+
+
+        <!-- MEMBER NAME -->
+
+        <div
+          class="yjs-id-name"
+          id="pvName"
+        >
+          Ashok Kumar
+        </div>
+
+
+        <!-- ROLE -->
+
+        <div
+          class="yjs-id-role"
+          id="pvRole"
+        >
+          Member
+        </div>
+
+
+        <!-- DETAILS -->
+
+        <div class="yjs-id-details">
+
+          <div class="yjs-id-detail">
+
+            <b>Father</b>
+
+            <span id="pvFather">
+              —
+            </span>
+
+          </div>
+
+
+          <div class="yjs-id-detail">
+
+            <b>ID</b>
+
+            <span id="pvNo">
+              YJS-0001
+            </span>
+
+          </div>
+
+
+          <div class="yjs-id-detail">
+
+            <b>Mobile</b>
+
+            <span id="pvPhone">
+              9XXXXXXXXX
+            </span>
+
+          </div>
+
+
+          <div class="yjs-id-detail">
+
+            <b>Blood</b>
+
+            <span id="pvBlood">
+              —
+            </span>
+
+          </div>
+
+
+          <div class="yjs-id-detail">
+
+            <b>Valid</b>
+
+            <span id="pvValid">
+              31/03/2027
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ADDRESS -->
+
+        <div class="yjs-id-address">
+          Sugnu, Dumardaga, Kanke, Ranchi, Jharkhand
+        </div>
+
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</section>
 <section class="section admin-only" id="shirt"><h2>Official T-Shirt Designer</h2><p class="lead">T-shirt design module अब केवल admin के लिए है।</p><div class="tools"><div class="panel"><div class="field"><label>T-Shirt Text</label><input id="shirtText" value="YUVA JAN SHAKTI SANGATHAN"></div><div class="field" style="margin-top:12px"><label>Tagline</label><input id="shirtTag" value="एकता • सेवा • संघर्ष • विकास"></div><div class="field" style="margin-top:12px"><label>Shirt Colour</label><div class="color-row"><span class="swatch" style="background:#111827" onclick="shirtColor='#111827';renderShirt()"></span><span class="swatch" style="background:#ffffff" onclick="shirtColor='#ffffff';renderShirt()"></span><span class="swatch" style="background:#0f766e" onclick="shirtColor='#0f766e';renderShirt()"></span><span class="swatch" style="background:#dc2626" onclick="shirtColor='#dc2626';renderShirt()"></span><span class="swatch" style="background:#1d4ed8" onclick="shirtColor='#1d4ed8';renderShirt()"></span></div></div><button class="btn" style="margin-top:18px" onclick="renderShirt()">Update Design</button></div><div class="shirt" id="shirtPreview"></div></div></section>
 <section class="section" id="support"><h2>Community Support</h2><p class="lead">Activities के लिए voluntary support और expense transparency को व्यवस्थित करने के लिए section.</p><div class="cards"><div class="card"><div class="icon">💰</div><h3>Support Fund</h3><p class="muted">Cleaning, tractor/JCB/vehicle और approved community activities के लिए सहयोग।</p><button class="btn" onclick="openModal('donate')">Support Now</button></div><div class="card"><div class="icon">📊</div><h3>Income / Expense</h3><p class="muted">Future admin panel में daily income, expense और saving records जोड़े जा सकते हैं।</p><button class="btn alt" onclick="toast('Admin dashboard module ready for backend integration.')">View Structure</button></div><div class="card"><div class="icon">📱</div><h3>Contact</h3><p class="muted">Email: yjs.sangathan21@gmail.com<br>Social: @yuva.jansakti</p><button class="btn alt" onclick="copyText('yjs.sangathan21@gmail.com')">Copy Email</button></div></div></section>
 <section class="section"><h2>Gallery & Updates</h2><p class="lead">यहाँ cleaning drives, road inspection, Gram Sabha और development work की photos लगाई जा सकती हैं।</p><div class="gallery"><div class="g">📷 Cleaning Drive</div><div class="g">🛣️ Road Inspection</div><div class="g">🏘️ Village Activity</div><div class="g">🌱 Community Work</div></div></section>
