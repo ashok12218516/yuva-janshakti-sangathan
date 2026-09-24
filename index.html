@@ -82,6 +82,40 @@
   logo();qr();
 })();
 </script>
+<style id="yjsIDAddressInputFixV69">
+#idcard .formgrid #idAddressWrap{display:flex!important;flex-direction:column!important;gap:6px!important;grid-column:1/-1!important}
+#idcard .formgrid #idAddress{display:block!important;width:100%!important;min-height:75px!important;box-sizing:border-box!important}
+</style>
+<script id="yjsIDAddressInputFixV69JS">
+(function(){
+  function ensureIDAddressField(){
+    const form=document.querySelector('#idcard .formgrid');
+    if(!form)return;
+    let input=document.getElementById('idAddress');
+    if(input){
+      const oldWrap=input.closest('.field');
+      if(oldWrap){
+        oldWrap.id='idAddressWrap';
+        oldWrap.classList.add('full');
+        const label=oldWrap.querySelector('label');
+        if(label)label.textContent='Address / Tola';
+      }
+      input.placeholder='Tola / Village / Full Address';
+      return;
+    }
+    const wrap=document.createElement('div');
+    wrap.id='idAddressWrap';
+    wrap.className='field full';
+    wrap.innerHTML='<label>Address / Tola</label><textarea id="idAddress" placeholder="Tola / Village / Full Address"></textarea>';
+    const father=document.getElementById('idFather');
+    if(father?.closest('.field')) father.closest('.field').after(wrap);
+    else form.appendChild(wrap);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',ensureIDAddressField);
+  else ensureIDAddressField();
+  setTimeout(ensureIDAddressField,300);
+})();
+</script>
 <script id="yjsFinalFormsV63">
 document.addEventListener('DOMContentLoaded',function(){
   function blankSelect(id,label){
