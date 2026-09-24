@@ -314,6 +314,88 @@ button,input,select,textarea{max-width:100%;min-width:0}
   #idCardPreview .yjs-id-side{width:85.6mm!important;height:54mm!important;min-width:85.6mm!important;max-width:85.6mm!important;border-radius:3mm!important;box-shadow:none!important;page-break-inside:avoid!important;break-inside:avoid!important}
 }
 </style>
+<style id="yjsIDCardPortraitV66">
+/* Final ID layout: same visual card footprint, rotated to portrait like a real PVC ID */
+#idCardPreview{
+  width:470px!important;
+  max-width:470px!important;
+  min-height:360px!important;
+  height:auto!important;
+  padding:10px!important;
+  margin:0 auto!important;
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:18px!important;
+  overflow:hidden!important;
+  background:linear-gradient(135deg,#071d35 0%,#0b3448 48%,#063f42 100%)!important;
+  border:1px solid #c99a24!important;
+  border-radius:16px!important;
+}
+#idCardPreview .yjs-id-side{
+  width:214px!important;
+  min-width:214px!important;
+  max-width:214px!important;
+  height:340px!important;
+  min-height:340px!important;
+  max-height:340px!important;
+  flex:0 0 214px!important;
+  border-radius:15px!important;
+  padding:0 10px 10px!important;
+  box-shadow:0 12px 28px #0006!important;
+}
+#idCardPreview .yjs-id-front-head{
+  height:57px!important;
+  margin:0 -10px 8px!important;
+  padding:7px 8px!important;
+}
+#idCardPreview .yjs-id-logo{width:38px!important;height:38px!important;min-width:38px!important}
+#idCardPreview .yjs-id-org-one{font-size:11px!important;line-height:1.1!important;white-space:normal!important}
+#idCardPreview .yjs-id-year-one{font-size:9px!important}
+#idCardPreview .yjs-id-photo-wrap{margin:7px 0 5px!important}
+#idCardPreview .yjs-id-member-photo{width:72px!important;height:88px!important;border-radius:8px!important}
+#idCardPreview .yjs-id-member-name{font-size:17px!important;line-height:1.05!important;margin-top:2px!important}
+#idCardPreview .yjs-id-member-role{font-size:10px!important;margin-top:3px!important}
+#idCardPreview .yjs-id-info-grid{
+  display:grid!important;
+  grid-template-columns:1fr 1fr!important;
+  gap:5px!important;
+  margin-top:9px!important;
+}
+#idCardPreview .yjs-id-info-box{
+  min-height:39px!important;
+  padding:5px 6px!important;
+  border-radius:6px!important;
+  overflow:hidden!important;
+}
+#idCardPreview .yjs-id-info-box b{font-size:8px!important;display:block!important}
+#idCardPreview .yjs-id-info-box span{font-size:8px!important;line-height:1.15!important;display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#idCardPreview .yjs-id-address{
+  left:10px!important;right:10px!important;bottom:9px!important;
+  font-size:7px!important;line-height:1.15!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+#idCardPreview .yjs-id-back-head{padding-top:12px!important}
+#idCardPreview .yjs-id-back-title{font-size:16px!important;line-height:1.1!important}
+#idCardPreview .yjs-id-back-sub{font-size:8px!important;margin-top:4px!important}
+#idCardPreview .yjs-id-qr{width:82px!important;height:82px!important;margin:11px auto 4px!important;padding:5px!important}
+#idCardPreview .yjs-id-qr-label{font-size:7px!important}
+#idCardPreview .yjs-id-terms{margin-top:9px!important;padding:7px 8px!important;border-radius:8px!important}
+#idCardPreview .yjs-id-terms h4{font-size:9px!important;margin:0 0 4px!important}
+#idCardPreview .yjs-id-terms ol{font-size:7px!important;line-height:1.35!important;padding-left:13px!important;margin:0!important}
+#idCardPreview .yjs-id-back-contact{font-size:6.5px!important;line-height:1.3!important;margin-top:7px!important}
+#idCardPreview .yjs-id-sign{font-size:6.5px!important;margin-top:4px!important}
+@media(max-width:800px){
+  #idCardPreview{width:100%!important;max-width:100%!important;justify-content:flex-start!important;overflow-x:auto!important;overflow-y:hidden!important}
+}
+@media print{
+  @page{size:A4 portrait;margin:10mm}
+  #idCardPreview{width:auto!important;max-width:none!important;height:auto!important;padding:0!important;background:#fff!important;border:0!important;overflow:visible!important;justify-content:flex-start!important;gap:8mm!important}
+  #idCardPreview .yjs-id-side{width:54mm!important;min-width:54mm!important;max-width:54mm!important;height:85.6mm!important;min-height:85.6mm!important;max-height:85.6mm!important;flex:0 0 54mm!important;box-shadow:none!important;page-break-inside:avoid!important;break-inside:avoid!important;-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}
+}
+</style>
 </head>
 <body>
 <div class="top"><span>📍 Sugnu, Dumardaga Panchayat, Kanke, Ranchi, Jharkhand – 835103</span><span>एकता | सेवा | संघर्ष | विकास</span></div>
