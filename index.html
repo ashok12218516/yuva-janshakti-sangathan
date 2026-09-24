@@ -525,8 +525,13 @@ renderMembers();renderShirt();adminGuard();
     if(photo){try{d.description+='\n\n📷 Issue Photo: '+await uploadUserPhoto(photo,'issue-photos')}catch(err){toast('Issue photo upload failed: '+(err?.message||'Please try again'));return}}
     let saved=false,issueId='';
     try{
-      const r=await supabaseClient.from('yjs_issues').insert(d).select('id').single();
-      if(!r.error&&r.data){saved=true;issueId=String(r.data.id).slice(0,8)}
+      /* Do NOT use .select() here. With RLS, INSERT can be allowed while
+         SELECT/RETURNING is blocked, which was incorrectly triggering the
+         local-storage fallback. Generate the UUID in the browser and insert
+         without requesting the inserted row back. */
+      const newId=(window.crypto&&crypto.randomUUID)?crypto.randomUUID():('00000000-0000-4000-8000-'+Date.now().toString(16).padStart(12,'0')).slice(0,36);
+      const r=await supabaseClient.from('yjs_issues').insert({...d,id:newId});
+      if(!r.error){saved=true;issueId=String(newId).slice(0,8)}
     }catch(_){}
     if(!saved){
       issueId='LOCAL-'+Date.now();
@@ -1281,7 +1286,7 @@ renderMembers();renderShirt();adminGuard();
 #idCardPreview .yjs-id-year-one{display:none!important}
 #idCardPreview .yjs-id-org-one{font-size:11px!important;font-weight:900!important;white-space:nowrap!important;line-height:1!important}
 #idCardPreview .yjs-id-info-grid .yjs-id-info-box:nth-child(5),
-#idCardPreview .yjs-id-info-grid .yjs-id-info-box:nth-child(6){display:none!important}
+#idCardPreview .yjs-id-info-grid .yjs-id-info-box:nth-child(6){display:block!important}
 #idCardPreview .yjs-id-bottom-meta{
   position:absolute!important;left:10px!important;right:10px!important;bottom:29px!important;
   display:grid!important;grid-template-columns:72px 1fr!important;gap:5px!important;
@@ -1291,6 +1296,8 @@ renderMembers();renderShirt();adminGuard();
   min-height:32px!important;padding:4px 5px!important;border-radius:6px!important;
   background:#ffffff16!important;border:1px solid #ffffff13!important;overflow:hidden!important;
 }
+#idCardPreview .yjs-id-bottom-meta .yjs-id-info-box:first-child{border:1px solid #f5c84b55!important}
+#idCardPreview .yjs-id-bottom-meta .yjs-id-info-box:last-child{border:1px solid #ffffff28!important}
 #idCardPreview .yjs-id-bottom-meta b{font-size:7px!important;display:block!important}
 #idCardPreview .yjs-id-bottom-meta span{font-size:7px!important;line-height:1.15!important;display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
 #idCardPreview .yjs-id-address{bottom:9px!important;font-size:6.5px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
@@ -1347,7 +1354,7 @@ renderMembers();renderShirt();adminGuard();
 
   /* 2026–27 is the default validity shown on the card and in the form. */
   const validInput=document.getElementById('idValid');
-  if(validInput && (!validInput.value || validInput.value==='31/03/2027'))validInput.value='2026-27';
+  if(validInput)validInput.value='2026-27';
 
   /* Keep the entered Address / Tola synced to the card. */
   const sync=()=>{
