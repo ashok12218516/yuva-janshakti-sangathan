@@ -1276,6 +1276,91 @@ renderMembers();renderShirt();adminGuard();
   }
 })();
 </script>
+<style id="yjsIDCardFinalV67">
+/* ID Card final small adjustments */
+#idCardPreview .yjs-id-year-one{display:none!important}
+#idCardPreview .yjs-id-org-one{font-size:11px!important;font-weight:900!important;white-space:nowrap!important;line-height:1!important}
+#idCardPreview .yjs-id-info-grid .yjs-id-info-box:nth-child(5),
+#idCardPreview .yjs-id-info-grid .yjs-id-info-box:nth-child(6){display:none!important}
+#idCardPreview .yjs-id-bottom-meta{
+  position:absolute!important;left:10px!important;right:10px!important;bottom:29px!important;
+  display:grid!important;grid-template-columns:72px 1fr!important;gap:5px!important;
+  padding-top:5px!important;border-top:1px solid #ffffff25!important;
+}
+#idCardPreview .yjs-id-bottom-meta .yjs-id-info-box{
+  min-height:32px!important;padding:4px 5px!important;border-radius:6px!important;
+  background:#ffffff16!important;border:1px solid #ffffff13!important;overflow:hidden!important;
+}
+#idCardPreview .yjs-id-bottom-meta b{font-size:7px!important;display:block!important}
+#idCardPreview .yjs-id-bottom-meta span{font-size:7px!important;line-height:1.15!important;display:block!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#idCardPreview .yjs-id-address{bottom:9px!important;font-size:6.5px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#idCardPreview .yjs-id-member-photo{margin-top:0!important}
+
+@media print{
+  #idCardPreview .yjs-id-bottom-meta{bottom:7.5mm!important;left:3.4mm!important;right:3.4mm!important;grid-template-columns:18mm 1fr!important;gap:1.2mm!important;padding-top:1.2mm!important}
+  #idCardPreview .yjs-id-bottom-meta .yjs-id-info-box{min-height:8mm!important;padding:1mm 1.2mm!important}
+  #idCardPreview .yjs-id-bottom-meta b{font-size:2.2mm!important}
+  #idCardPreview .yjs-id-bottom-meta span{font-size:2.2mm!important}
+  #idCardPreview .yjs-id-address{bottom:2.6mm!important;font-size:2.1mm!important}
+}
+</style>
+<script id="yjsIDCardFinalV67JS">
+(function(){
+  const card=document.querySelector('#idCardPreview .yjs-id-front');
+  if(!card)return;
+
+  /* Hide the year from the header and keep the organisation name on one bold line. */
+  const yearTop=card.querySelector('.yjs-id-year-one');
+  if(yearTop)yearTop.style.display='none';
+  const org=card.querySelector('.yjs-id-org-one');
+  if(org){org.textContent='युवा जनशक्ति संगठन सुगनू';org.style.fontWeight='900';org.style.whiteSpace='nowrap'}
+
+  /* Put Valid Till + Address/Tola together at the bottom. */
+  const grid=card.querySelector('.yjs-id-info-grid');
+  if(grid){
+    let bottom=card.querySelector('.yjs-id-bottom-meta');
+    if(!bottom){
+      const boxes=grid.querySelectorAll('.yjs-id-info-box');
+      const valid=boxes[4],addr=boxes[5];
+      bottom=document.createElement('div');bottom.className='yjs-id-bottom-meta';
+      if(valid)bottom.appendChild(valid);
+      if(addr)bottom.appendChild(addr);
+      card.appendChild(bottom);
+    }
+  }
+
+  /* Add Address / Tola field to the ID generator form. */
+  const form=document.querySelector('#idcard .formgrid');
+  if(form){
+    let a=document.getElementById('idAddress');
+    if(!a){
+      const wrap=document.createElement('div');
+      wrap.className='field full';
+      wrap.innerHTML='<label>Address / Tola</label><textarea id="idAddress" placeholder="Tola / Village / Address"></textarea>';
+      form.appendChild(wrap);a=wrap.querySelector('#idAddress');
+    }else{
+      const wrap=a.closest('.field');
+      if(wrap)wrap.querySelector('label').textContent='Address / Tola';
+      a.placeholder='Tola / Village / Address';
+    }
+  }
+
+  /* 2026–27 is the default validity shown on the card and in the form. */
+  const validInput=document.getElementById('idValid');
+  if(validInput && (!validInput.value || validInput.value==='31/03/2027'))validInput.value='2026-27';
+
+  /* Keep the entered Address / Tola synced to the card. */
+  const sync=()=>{
+    const p=card.querySelector('#pvAddress'),a=document.getElementById('idAddress');
+    if(p)p.textContent=(a?.value||'').trim()||'—';
+    const pv=card.querySelector('#pvValid');
+    if(pv)pv.textContent=document.getElementById('idValid')?.value||'2026-27';
+  };
+  document.getElementById('idAddress')?.addEventListener('input',sync);
+  document.getElementById('idValid')?.addEventListener('input',sync);
+  sync();
+})();
+</script>
 <style id="yjsGalleryAspectRatioV40">
 /* Gallery V40: uploaded photos keep their original aspect ratio */
 .gallery-card-final{min-width:0;overflow:hidden;background:#fff;border:1px solid #dce5ed;border-radius:14px;padding:8px}
