@@ -1523,3 +1523,34 @@ renderMembers();renderShirt();adminGuard();
   }
 })();
 </script>
+
+<!-- FINAL ID CARD OVERRIDE: V70 style + requested changes only -->
+<style id="yjsIDCardFinalRequestedOnly">
+#idCardPreview .yjs-id-info-box b{white-space:nowrap!important}
+#idCardPreview .yjs-id-info-box span{overflow-wrap:anywhere!important;word-break:break-word!important}
+#idCardPreview .yjs-id-address{left:12px!important;right:12px!important;bottom:10px!important;padding:4px 10px!important;box-sizing:border-box!important;text-align:center!important;font-size:8.5px!important;line-height:1.35!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:break-word!important}
+#idCardPreview .yjs-id-front .yjs-id-org-one{display:block!important;font-weight:900!important;white-space:nowrap!important}
+#idCardPreview .yjs-id-front .yjs-id-address-top{display:block!important;text-align:center!important;font-size:6.2px!important;line-height:1.25!important;margin:1px 0 0!important;color:#dbeafe!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#idCardPreview .yjs-id-front .yjs-id-address{display:none!important}
+#idCardPreview .yjs-id-info-box b{white-space:nowrap!important}
+@media print{
+#idCardPreview .yjs-id-address{left:3mm!important;right:3mm!important;bottom:2.2mm!important;padding:1mm 2.2mm!important;font-size:2.15mm!important;line-height:1.35!important}
+}
+</style>
+<script id="yjsIDCardFinalRequestedOnlyJS">
+(function(){
+ function apply(){
+  const front=document.querySelector('#idCardPreview .yjs-id-front'); if(!front)return;
+  const org=front.querySelector('.yjs-id-org-one');
+  if(org){
+   org.textContent='युवा जनशक्ति संगठन सुगनू';
+   let sub=front.querySelector('.yjs-id-address-top');
+   if(!sub){sub=document.createElement('div');sub.className='yjs-id-address-top';org.insertAdjacentElement('afterend',sub)}
+   sub.textContent='Sugnu, Dumardaga, Kanke, Ranchi, Jharkhand – 835103';
+  }
+  front.querySelectorAll('.yjs-id-info-box b').forEach(b=>{if(b.textContent.trim()==='Father')b.textContent="Father's Name"});
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply);else apply();
+ setTimeout(apply,300);
+})();
+</script>
