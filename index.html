@@ -82,6 +82,38 @@
   logo();qr();
 })();
 </script>
+<script id="yjsFinalFormsV63">
+document.addEventListener('DOMContentLoaded',function(){
+  function blankSelect(id,label){
+    const el=document.getElementById(id);if(!el)return;
+    if(!el.querySelector('option[data-yjs-placeholder]')){
+      const o=document.createElement('option');o.value='';o.textContent=label;o.disabled=true;o.selected=true;o.dataset.yjsPlaceholder='1';el.insertBefore(o,el.firstChild);
+    }
+    el.value='';
+  }
+  blankSelect('mTola','-- Select Village / Tola --');
+  blankSelect('mRole','-- Select Role / Category --');
+  blankSelect('mBlood','-- Select Blood Group --');
+  const issueForm=[...document.querySelectorAll('form')].find(f=>f.closest('.panel')?.querySelector('h2')?.textContent.includes('Report an Issue'));
+  if(issueForm){
+    const ss=issueForm.querySelectorAll('select');
+    if(ss[0]&&!ss[0].querySelector('option[data-yjs-placeholder]')){const o=document.createElement('option');o.value='';o.textContent='-- Select Issue Type --';o.disabled=true;o.selected=true;o.dataset.yjsPlaceholder='1';ss[0].insertBefore(o,ss[0].firstChild)}
+    if(ss[1]&&!ss[1].querySelector('option[data-yjs-placeholder]')){const o=document.createElement('option');o.value='';o.textContent='-- Select Tola --';o.disabled=true;o.selected=true;o.dataset.yjsPlaceholder='1';ss[1].insertBefore(o,ss[1].firstChild)}
+    ss.forEach(s=>s.value='');
+  }
+  const clearFields=selector=>{
+    document.querySelectorAll(selector+' input:not([type=file]):not([type=hidden]),'+selector+' textarea').forEach(el=>el.value='');
+    document.querySelectorAll(selector+' select').forEach(el=>{if(el.querySelector('option[data-yjs-placeholder]'))el.value='';});
+  };
+  clearFields('#shirt');
+  const idFields=['idName','idNo','idRole','idPhone','idBlood','idValid','idFather','idAddress'];
+  idFields.forEach(id=>{const el=document.getElementById(id);if(el)el.value=''});
+  const idPhoto=document.getElementById('idPhotoInput');if(idPhoto)idPhoto.value='';
+  const pv=document.getElementById('pvPhoto');if(pv)pv.removeAttribute('src');
+  if(typeof refreshID==='function')refreshID();
+});
+</script>
+</body>
 <script id="yjsMembershipRolesV46">
 document.addEventListener('DOMContentLoaded',function(){
   const role=document.getElementById('mRole');
@@ -249,7 +281,40 @@ button,input,select,textarea{max-width:100%;min-width:0}
 .nav-logo-wrap{min-width:38px}.nav-logo-wrap #navCloudLogo,.nav-logo-wrap #navLogoText{width:38px;height:38px;border-radius:11px}.nav-logo-wrap #navLogoBtn{font-size:9px;padding:5px}.public-logo-box img,.public-logo-box #publicLogoPlaceholder{width:85px;height:85px}
 @media(max-width:800px){.top{padding:7px 4%;font-size:10px;line-height:1.3}.top span:last-child{display:none}.nav{align-items:flex-start}.links{max-width:54%;overflow-x:auto;scrollbar-width:none;flex-wrap:nowrap;white-space:nowrap}.links::-webkit-scrollbar{display:none}.links a{font-size:11px;padding:5px 2px}.links .btn{padding:8px 9px;font-size:10px;white-space:nowrap}.hero{padding:38px 5%}.hero-inner{gap:22px}.hero-card{order:2}.hero h1{margin:13px 0}.hero .btn{padding:10px 12px;font-size:13px}.section{padding:38px 5%}.cards{grid-template-columns:1fr}.tools{grid-template-columns:1fr}.admin-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.admin-stat{padding:13px}.admin-stat b{font-size:22px}.id-details{font-size:11px}}
 @media(max-width:430px){.brand>span:last-child{font-size:11px}.brand small{display:none}.links{max-width:48%}.links a{display:none}.links a[href="#gallery"],.links a[href="#support"],.links .btn{display:inline-flex}.hero h1{font-size:31px}.statgrid{grid-template-columns:1fr 1fr}.stat:last-child{grid-column:1/-1}.formgrid{grid-template-columns:1fr!important}.field.full{grid-column:auto}.section h2{font-size:24px}.gallery{grid-template-columns:1fr 1fr}.g{height:110px;font-size:12px}.gallery-card-final img{height:125px!important}.id-details{grid-template-columns:1fr}.id-photo{width:78px;height:96px}.modalbox h2{font-size:22px}}
-</style></head>
+</style><style id="yjsFinalIDV59">
+#idCardPreview{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:flex-start!important;justify-content:center!important;gap:18px!important;width:100%!important;overflow:visible!important}
+#idCardPreview .yjs-id-side{width:340px!important;height:214px!important;min-width:340px!important;max-width:340px!important;border-radius:14px!important;padding:0 12px 9px!important;box-shadow:0 10px 25px #0003!important}
+#idCardPreview .yjs-id-front-head{height:56px!important;margin:0 -12px 7px!important;padding:7px 10px!important}
+#idCardPreview .yjs-id-logo{width:40px!important;height:40px!important;min-width:40px!important}
+#idCardPreview .yjs-id-org-one{font-size:12px!important}
+#idCardPreview .yjs-id-year-one{font-size:11px!important}
+#idCardPreview .yjs-id-photo-wrap{margin:3px 0 4px!important}
+#idCardPreview .yjs-id-member-photo{width:54px!important;height:64px!important;border-radius:7px!important}
+#idCardPreview .yjs-id-member-name{font-size:17px!important;line-height:1.05!important}
+#idCardPreview .yjs-id-member-role{font-size:10px!important;margin-top:2px!important}
+#idCardPreview .yjs-id-info-grid{margin-top:5px!important;grid-template-columns:1fr 1fr 1fr!important;gap:4px!important}
+#idCardPreview .yjs-id-info-box{padding:4px 5px!important;border-radius:6px!important;font-size:8px!important;line-height:1.15!important}
+#idCardPreview .yjs-id-info-box b{font-size:8px!important}
+#idCardPreview .yjs-id-address{font-size:7px!important;margin-top:4px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important}
+#idCardPreview .yjs-id-back-head{padding-top:9px!important}
+#idCardPreview .yjs-id-back-title{font-size:16px!important}
+#idCardPreview .yjs-id-back-sub{font-size:9px!important}
+#idCardPreview .yjs-id-qr{width:66px!important;height:66px!important;margin:5px auto 2px!important}
+#idCardPreview .yjs-id-qr-label{font-size:7px!important}
+#idCardPreview .yjs-id-terms{font-size:7px!important;line-height:1.18!important;margin-top:4px!important}
+#idCardPreview .yjs-id-terms h4{font-size:9px!important;margin:2px 0!important}
+#idCardPreview .yjs-id-terms ol{margin:0;padding-left:13px!important}
+#idCardPreview .yjs-id-back-contact{font-size:6.5px!important;line-height:1.2!important;margin-top:3px!important}
+#idCardPreview .yjs-id-sign{font-size:6.5px!important;margin-top:2px!important}
+@media(max-width:800px){#idCardPreview{flex-wrap:wrap!important;gap:12px!important}#idCardPreview .yjs-id-side{width:min(340px,92vw)!important;min-width:min(340px,92vw)!important}}
+@media print{
+  @page{size:A4 landscape;margin:10mm}
+  html,body{background:#fff!important}
+  #idCardPreview{position:static!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;gap:8mm!important;width:auto!important;height:auto!important;margin:0!important}
+  #idCardPreview .yjs-id-side{width:85.6mm!important;height:54mm!important;min-width:85.6mm!important;max-width:85.6mm!important;border-radius:3mm!important;box-shadow:none!important;page-break-inside:avoid!important;break-inside:avoid!important}
+}
+</style>
+</head>
 <body>
 <div class="top"><span>📍 Sugnu, Dumardaga Panchayat, Kanke, Ranchi, Jharkhand – 835103</span><span>एकता | सेवा | संघर्ष | विकास</span></div>
 <nav class="nav"><a class="brand" href="#home"><span class="logo">YJS</span><span>युवा जनशक्ति संगठन सुगनू<small>COMMUNITY • SERVICE • DEVELOPMENT</small></span></a><div class="links"><a href="#about">About</a><a href="#work">Activities</a><a href="#membership">Membership</a><a href="#gallery">Gallery</a><a href="#support">Support</a><a href="#noticeBoard">Notice</a><button class="btn" onclick="openModal('join')">Join Now</button><button class="btn gold" id="adminNavBtn" onclick="toggleAdmin()">🔐 Admin Login</button></div></nav>
@@ -318,10 +383,11 @@ async function adminLogin(){let email=$('adminEmail').value.trim(),password=$('a
 async function adminLogout(){await supabaseClient.auth.signOut();adminVerified=false;sessionStorage.removeItem(ADMIN_KEY);document.body.classList.remove('admin-on');location.hash='home';toast('Admin logged out')}
 function isAdmin(){return adminVerified}
 async function adminGuard(){if(await verifyAdmin())await renderAdmin()}
-async function renderAdmin(){if(!isAdmin())return;let [mr,ir,dr]=await Promise.all([supabaseClient.from('yjs_members').select('*').order('created_at',{ascending:false}),supabaseClient.from('yjs_issues').select('*').order('created_at',{ascending:false}),supabaseClient.from('yjs_donations').select('*').order('created_at',{ascending:false})]);if(mr.error||ir.error||dr.error){toast('Cloud data load failed');return}let ms=mr.data||[],is=ir.data||[],ds=dr.data||[];$('dashMembers').textContent=277+ms.length;$('dashIssues').textContent=is.length;$('dashDonations').textContent=ds.length;$('dashStorage').textContent='Supabase';$('adminMembers').innerHTML=ms.length?`<table class="data-table"><tr><th>Photo</th><th>ID</th><th>Name</th><th>Mobile</th><th>Tola</th><th>Role</th><th>Status</th><th>Actions</th></tr>${ms.map(m=>`<tr><td>${m.photo_path?`<img src="${supabaseClient.storage.from(MEMBER_BUCKET).getPublicUrl(m.photo_path).data.publicUrl}" style="width:42px;height:42px;border-radius:50%;object-fit:cover">`:''}</td><td>${safe(m.member_code||m.id)}</td><td>${safe(m.name)}</td><td>${safe(m.phone)}</td><td>${safe(m.tola)}</td><td>${safe(m.role)}</td><td>${safe(m.status)}</td><td><button class="btn alt" onclick="editMember('${m.id}')">Edit</button> <button class="btn" style="background:#dc2626" onclick="deleteMember('${m.id}')">Delete</button> <button class="btn gold" onclick="loadCloudMember('${m.id}')">ID</button></td></tr>`).join('')}</table>`:'<p class="muted">No registrations yet.</p>';$('adminIssues').innerHTML=is.length?`<table class="data-table"><tr><th>ID</th><th>Name</th><th>Mobile</th><th>Type</th><th>Tola</th><th>Description</th><th>Status</th><th>Action</th></tr>${is.map(x=>`<tr><td>${safe(x.id.slice(0,8))}</td><td>${safe(x.name)}</td><td>${safe(x.mobile)}</td><td>${safe(x.issue_type)}</td><td>${safe(x.tola)}</td><td>${safe(x.description)}</td><td>${safe(x.status)}</td><td><button class="btn" style="background:#dc2626" onclick="deleteIssue('${x.id}')">Delete</button></td></tr>`).join('')}</table>`:'<p class="muted">No issue reports.</p>';$('adminDonations').innerHTML=ds.length?`<table class="data-table"><tr><th>ID</th><th>Name</th><th>Mobile</th><th>Amount</th><th>Category</th><th>Note</th><th>Status</th><th>Action</th></tr>${ds.map(x=>`<tr><td>${safe(x.id.slice(0,8))}</td><td>${safe(x.name)}</td><td>${safe(x.mobile)}</td><td>₹${safe(x.amount)}</td><td>${safe(x.category)}</td><td>${safe(x.note)}</td><td>${safe(x.status)}</td><td><button class="btn" style="background:#dc2626" onclick="deleteDonation('${x.id}')">Delete</button></td></tr>`).join('')}</table>`:'<p class="muted">No support entries.</p>'}
-async function loadCloudMember(id){let {data,error}=await supabaseClient.from('yjs_members').select('*').eq('id',id).single();if(error||!data)return toast('Member load failed');$('idName').value=data.name;$('idNo').value=data.member_code||data.id;$('idRole').value=data.role;$('idPhone').value=data.phone;$('pvPhoto').src=data.photo_path?supabaseClient.storage.from(MEMBER_BUCKET).getPublicUrl(data.photo_path).data.publicUrl:'';updateID(false);location.hash='idcard'}
+async function renderAdmin(){if(!isAdmin())return;let [mr,ir,dr]=await Promise.all([supabaseClient.from('yjs_members').select('*').order('created_at',{ascending:false}),supabaseClient.from('yjs_issues').select('*').order('created_at',{ascending:false}),supabaseClient.from('yjs_donations').select('*').order('created_at',{ascending:false})]);if(mr.error||ir.error||dr.error){toast('Cloud data load failed');return}let ms=mr.data||[],is=ir.data||[],ds=dr.data||[];$('dashMembers').textContent=277+ms.length;$('dashIssues').textContent=is.length;$('dashDonations').textContent=ds.length;$('dashStorage').textContent='Supabase';$('adminMembers').innerHTML=ms.length?`<table class="data-table"><tr><th>Photo</th><th>ID</th><th>Name</th><th>Mobile</th><th>Tola</th><th>Role</th><th>Status</th><th>Actions</th></tr>${ms.map(m=>`<tr><td>${m.photo_path?`<img src="${supabaseClient.storage.from(MEMBER_BUCKET).getPublicUrl(m.photo_path).data.publicUrl}" style="width:42px;height:42px;border-radius:50%;object-fit:cover">`:''}</td><td>${safe(m.member_code||m.id)}</td><td>${safe(m.name)}</td><td>${safe(m.phone)}</td><td>${safe(m.tola)}</td><td>${safe(m.role)}</td><td>${safe(m.status)}</td><td><button class="btn alt" onclick="editMember('${m.id}')">Edit</button> <button class="btn" style="background:#dc2626" onclick="deleteMember('${m.id}')">Delete</button> <button class="btn gold" onclick="loadCloudMember('${m.id}')">ID</button></td></tr>`).join('')}</table>`:'<p class="muted">No registrations yet.</p>';$('adminIssues').innerHTML=is.length?`<table class="data-table"><tr><th>ID</th><th>Name</th><th>Mobile</th><th>Type</th><th>Tola</th><th>Description</th><th>Status</th><th>Action</th></tr>${is.map(x=>`<tr><td>${safe(x.id.slice(0,8))}</td><td>${safe(x.name)}</td><td>${safe(x.mobile)}</td><td>${safe(x.issue_type)}</td><td>${safe(x.tola)}</td><td>${safe(x.description)}</td><td><select class="issue-status-select" onchange="updateIssueStatus('${x.id}',this.value)"><option value="pending" ${x.status==='pending'?'selected':''}>Pending</option><option value="in_progress" ${x.status==='in_progress'?'selected':''}>In Progress</option><option value="resolved" ${x.status==='resolved'?'selected':''}>Resolved</option><option value="rejected" ${x.status==='rejected'?'selected':''}>Rejected</option></select></td><td><button class="btn" style="background:#dc2626" onclick="deleteIssue('${x.id}')">Delete</button></td></tr>`).join('')}</table>`:'<p class="muted">No issue reports.</p>';$('adminDonations').innerHTML=ds.length?`<table class="data-table"><tr><th>ID</th><th>Name</th><th>Mobile</th><th>Amount</th><th>Category</th><th>Note</th><th>Status</th><th>Action</th></tr>${ds.map(x=>`<tr><td>${safe(x.id.slice(0,8))}</td><td>${safe(x.name)}</td><td>${safe(x.mobile)}</td><td>₹${safe(x.amount)}</td><td>${safe(x.category)}</td><td>${safe(x.note)}</td><td>${safe(x.status)}</td><td><button class="btn" style="background:#dc2626" onclick="deleteDonation('${x.id}')">Delete</button></td></tr>`).join('')}</table>`:'<p class="muted">No support entries.</p>'}
+async function loadCloudMember(id){let {data,error}=await supabaseClient.from('yjs_members').select('*').eq('id',id).single();if(error||!data)return toast('Member load failed');$('idName').value=data.name||'';$('idNo').value=data.member_code||data.id;$('idRole').value=data.role||'';$('idPhone').value=data.phone||'';$('idBlood').value=data.blood_group||'';const father=document.getElementById('idFather');if(father)father.value=data.father_name||'';const address=document.getElementById('idAddress');if(address)address.value=data.full_address||data.tola||'';$('pvPhoto').src=data.photo_path?supabaseClient.storage.from(MEMBER_BUCKET).getPublicUrl(data.photo_path).data.publicUrl:'';updateID(false);location.hash='idcard';window.scrollTo({top:document.getElementById('idcard')?.offsetTop||0,behavior:'smooth'})}
 async function editMember(id){if(!isAdmin())return;let {data:m,error}=await supabaseClient.from('yjs_members').select('*').eq('id',id).single();if(error||!m)return toast('Member load failed');let n=prompt('Member name:',m.name);if(n===null)return;let p=prompt('Mobile:',m.phone);let t=prompt('Tola:',m.tola);let r=prompt('Role:',m.role);let s=prompt('Status (pending/approved/rejected):',m.status);let {error:u}=await supabaseClient.from('yjs_members').update({name:n.trim()||m.name,phone:p===null?m.phone:p.trim(),tola:t===null?m.tola:t.trim(),role:r===null?m.role:r.trim(),status:s===null?m.status:s.trim()}).eq('id',id);if(u){toast('Member update failed: '+u.message);return}await renderAdmin();toast('Member updated')}
 async function deleteMember(id){if(!isAdmin()||!confirm('Delete this member?'))return;let {error}=await supabaseClient.from('yjs_members').delete().eq('id',id);if(error){toast('Delete failed: '+error.message);return}await renderAdmin();toast('Member deleted')}
+async function updateIssueStatus(id,status){if(!isAdmin())return;const {error}=await supabaseClient.from('yjs_issues').update({status}).eq('id',id);if(error){toast('Status update failed: '+error.message);return}await renderAdmin();toast('Complaint status updated: '+status.replace('_',' '))}
 async function deleteIssue(id){if(!isAdmin()||!confirm('Delete this issue?'))return;let {error}=await supabaseClient.from('yjs_issues').delete().eq('id',id);if(error){toast('Delete failed: '+error.message);return}await renderAdmin();toast('Issue deleted')}
 async function deleteDonation(id){if(!isAdmin()||!confirm('Delete this support entry?'))return;let {error}=await supabaseClient.from('yjs_donations').delete().eq('id',id);if(error){toast('Delete failed: '+error.message);return}await renderAdmin();toast('Support entry deleted')}
 renderMembers();renderShirt();adminGuard();
@@ -371,13 +437,28 @@ renderMembers();renderShirt();adminGuard();
   const saveLocalIssue=d=>{const a=localIssues();a.unshift({...d,id:'LOCAL-'+Date.now(),created_at:new Date().toISOString()});localStorage.setItem('yjsIssuesV1',JSON.stringify(a))};
   if(issueForm)issueForm.addEventListener('submit',async e=>{
     e.preventDefault();e.stopImmediatePropagation();
-    const inputs=issueForm.querySelectorAll('input'),sels=issueForm.querySelectorAll('select'),desc=issueForm.querySelector('textarea');
+    const inputs=issueForm.querySelectorAll('input'),sels=issueForm.querySelectorAll('select'),desc=issueForm.querySelector('textarea'),photo=issueForm.querySelector('#issuePhoto')?.files?.[0];
     const d={name:inputs[0].value.trim(),mobile:inputs[1].value.trim(),issue_type:sels[0].value,tola:sels[1].value,description:desc.value.trim(),status:'pending'};
     if(!d.name||!d.mobile||!d.description){toast('Please fill all required fields');return}
-    let saved=false;
-    try{const r=await supabaseClient.from('yjs_issues').insert(d);if(!r.error)saved=true}catch(_){}
-    if(!saved)saveLocalIssue(d);
-    issueForm.reset();toast(saved?'Issue submitted successfully':'Issue saved on this device. Admin cloud policy needs setup.');
+    if(photo){try{d.description+='\n\n📷 Issue Photo: '+await uploadUserPhoto(photo,'issue-photos')}catch(err){toast('Issue photo upload failed: '+(err?.message||'Please try again'));return}}
+    let saved=false,issueId='';
+    try{
+      const r=await supabaseClient.from('yjs_issues').insert(d).select('id').single();
+      if(!r.error&&r.data){saved=true;issueId=String(r.data.id).slice(0,8)}
+    }catch(_){}
+    if(!saved){
+      issueId='LOCAL-'+Date.now();
+      saveLocalIssue(d);
+    }
+    issueForm.reset();
+    const oldResult=document.getElementById('issueSubmitResult');if(oldResult)oldResult.remove();
+    const result=document.createElement('div');result.id='issueSubmitResult';result.className='notice';result.style.marginTop='15px';result.innerHTML=saved
+      ? '<b>✅ Complaint Submitted Successfully</b><br><span style="font-size:16px">आपका Complaint ID: <strong style="color:#b45309;letter-spacing:1px">'+safe(issueId)+'</strong></span><br><small>इस ID को screenshot/save करके रखें। इसी ID से बाद में status track करें।</small>'
+      : '<b>⚠️ Complaint saved on this device</b><br><span style="font-size:16px">Complaint ID: <strong style="color:#b45309">'+safe(issueId)+'</strong></span><br><small>Cloud save नहीं हुआ, इसलिए यह ID केवल इसी device पर उपलब्ध है।</small>';
+    issueForm.after(result);
+    const track=document.getElementById('trackIssueId');if(track&&saved)track.value=issueId;
+    result.scrollIntoView({behavior:'smooth',block:'center'});
+    toast(saved?'Complaint submitted successfully':'Complaint saved on this device');
   },true);
 
   const donationForm=document.getElementById('donationForm');
