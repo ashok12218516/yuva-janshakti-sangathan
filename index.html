@@ -536,7 +536,7 @@ renderMembers();renderShirt();adminGuard();
         head.innerHTML='<span class="id-logo-mark">YJS</span><span style="text-align:center;flex:1"><b class="id-org">युवा जनशक्ति संगठन</b><br><small>SUGNU • DUMARDAGA • KANKE</small></span><span>2026–27</span>';
       }
       const details=preview.querySelector('.id-details');
-      if(details&&!document.getElementById('pvFather'))details.insertAdjacentHTML('afterbegin','<div><b>Father</b><br><span id="pvFather">—</span></div>');
+      if(details&&!document.getElementById('pvFather'))details.insertAdjacentHTML('afterbegin','<div><b>Father'name</b><br><span id="pvFather">—</span></div>');
       const role=preview.querySelector('.id-role');if(role)role.textContent='Member • युवा जनशक्ति संगठन';
     }
   }
@@ -939,11 +939,11 @@ renderMembers();renderShirt();adminGuard();
     '<div class="id-details id-details-card">'+
       '<div><b>Father\'s Name</b><br><span id="pvFather">पिता का नाम</span></div>'+ 
       '<div><b>ID</b><br><span id="pvNo">YJS-0001</span></div>'+ 
-      '<div><b>Mobile</b><br><span id="pvPhone">9XXXXXXXXX</span></div>'+ 
+      '<div><b>Mobile no.</b><br><span id="pvPhone">9XXXXXXXXX</span></div>'+ 
       '<div><b>Blood</b><br><span id="pvBlood">—</span></div>'+ 
       '<div><b>Valid</b><br><span id="pvValid">31/03/2027</span></div>'+ 
     '</div>'+ 
-    '<div class="id-address">Sugnu, Dumardaga, Kanke, Ranchi, Jharkhand</div>';
+    '<div class="id-address"></div>';
 
   async function loadLogo(){
     const img=document.getElementById('idGroupLogo');
